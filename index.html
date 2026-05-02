@@ -3,35 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Linkrii</title>
+    <title>Linkrii | Hub</title>
     <style>
-        body { font-family: sans-serif; background: #121212; color: white; text-align: center; padding: 50px 20px; }
-        .container { max-width: 400px; margin: auto; }
-        h1 { font-size: 24px; margin-bottom: 30px; }
-        .link { 
-            display: block; 
-            background: #222; 
-            color: #00ff88; 
-            text-decoration: none; 
-            padding: 15px; 
-            margin-bottom: 15px; 
-            border-radius: 8px; 
-            border: 1px solid #333;
-            transition: 0.3s;
+        :root {
+            --bg: #0d1117;
+            --card-bg: #161b22;
+            --accent: #52b2a1; /* Oxidized Copper Glow */
+            --text: #ffffff;
         }
-        .link:hover { background: #333; transform: scale(1.02); }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background-color: var(--bg); 
+            color: var(--text); 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container { 
+            width: 90%; 
+            max-width: 450px; 
+            text-align: center; 
+            background: var(--card-bg);
+            padding: 40px 20px;
+            border-radius: 20px;
+            border: 1px solid #30363d;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        h1 { font-size: 28px; letter-spacing: 2px; margin-bottom: 10px; color: var(--accent); }
+        p { opacity: 0.7; margin-bottom: 30px; font-size: 14px; }
+        .links-gap { display: flex; flex-direction: column; gap: 15px; }
+        .link { 
+            background: #21262d; 
+            color: var(--text); 
+            text-decoration: none; 
+            padding: 16px; 
+            border-radius: 12px; 
+            font-weight: 600;
+            transition: all 0.2s ease-in-out;
+            border: 1px solid transparent;
+        }
+        .link:hover { 
+            background: var(--accent); 
+            color: var(--bg);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(82, 178, 161, 0.4);
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Linkrii.site</h1>
+        <h1>LINKRII</h1>
+        <p>Gamer • Developer • Creator</p>
         
-        <!-- Replace the # with your actual links -->
-        <a href="[https://www.youtube.com/@RoobRBLX](https://www.youtube.com/@RoobRBLX)" class="link">YouTube</a>
-        <a href="#" class="link">Discord</a>
-        <a href="#" class="link">Gaming Server</a>
-        <a href="#" class="link">Twitter / X</a>
-        
+        <div class="links-gap">
+            <a href="https://youtube.com" class="link">YOUTUBE</a>
+            <a href="https://discord.com" class="link">DISCORD SERVER</a>
+            <a href="#" class="link">MINECRAFT SERVER</a>
+            <a href="#" class="link">LATEST PROJECT</a>
+        </div>
     </div>
 </body>
 </html>
