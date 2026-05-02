@@ -31,8 +31,12 @@
             border: 1px solid #30363d;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
-        h1 { font-size: 28px; letter-spacing: 2px; margin-bottom: 10px; color: var(--accent); }
-        p { opacity: 0.7; margin-bottom: 30px; font-size: 14px; }
+        .logo {
+            max-width: 250px; /* Adjust size if needed */
+            height: auto;
+            margin-bottom: 20px;
+        }
+        p { opacity: 0.7; margin-bottom: 30px; font-size: 14px; margin-top: 0;}
         .links-gap { display: flex; flex-direction: column; gap: 15px; }
         .link { 
             background: #21262d; 
@@ -54,7 +58,8 @@
 </head>
 <body>
     <div class="container">
-        <h1>LINKRII</h1>
+        <!-- Make sure your logo file is uploaded and named logo.png -->
+        <img src="logo.png" alt="LinkRii Logo" class="logo">
         <p>Gamer • Developer • Creator</p>
         
         <div class="links-gap">
