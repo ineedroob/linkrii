@@ -3,71 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Linkrii | Hub</title>
+    <title>LinkRii Hub</title>
     <style>
+        /* Wii / WiiLink Color Palette */
         :root {
-            --bg: #0d1117;
-            --card-bg: #161b22;
-            --accent: #52b2a1; /* Oxidized Copper Glow */
-            --text: #ffffff;
+            --wii-blue: #00aaff;
+            --wii-light-blue: #e0f4ff;
+            --wii-gray: #7d7d7d;
+            --wii-bg: #f7f7f7;
         }
+
         body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            background-color: var(--bg); 
-            color: var(--text); 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            background: var(--wii-bg);
+            background-image: radial-gradient(circle, #ffffff 0%, #e8f4f8 100%);
+            color: #444;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             min-height: 100vh;
             margin: 0;
         }
-        .container { 
-            width: 90%; 
-            max-width: 450px; 
+
+        .wii-container { 
+            width: 95%; 
+            max-width: 600px; 
             text-align: center; 
-            background: var(--card-bg);
-            padding: 40px 20px;
-            border-radius: 20px;
-            border: 1px solid #30363d;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            background: white;
+            padding: 40px;
+            border-radius: 40px;
+            border: 4px solid var(--wii-blue);
+            box-shadow: 0 10px 0px rgba(0, 170, 255, 0.1);
         }
+
         .logo {
-            max-width: 250px; /* Adjust size if needed */
+            max-width: 300px;
             height: auto;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
+            filter: drop-shadow(2px 2px 0px rgba(0,0,0,0.1));
         }
-        p { opacity: 0.7; margin-bottom: 30px; font-size: 14px; margin-top: 0;}
-        .links-gap { display: flex; flex-direction: column; gap: 15px; }
-        .link { 
-            background: #21262d; 
-            color: var(--text); 
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .channel-btn { 
+            background: white; 
+            color: var(--wii-gray); 
             text-decoration: none; 
-            padding: 16px; 
-            border-radius: 12px; 
-            font-weight: 600;
-            transition: all 0.2s ease-in-out;
-            border: 1px solid transparent;
+            padding: 25px 10px; 
+            border-radius: 15px; 
+            font-weight: bold;
+            font-size: 14px;
+            text-transform: uppercase;
+            border: 3px solid #eee;
+            transition: all 0.1s ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: inset 0 -4px 0 #eee;
         }
-        .link:hover { 
-            background: var(--accent); 
-            color: var(--bg);
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(82, 178, 161, 0.4);
+
+        .channel-btn:hover { 
+            border-color: var(--wii-blue);
+            color: var(--wii-blue);
+            transform: scale(1.03);
+            background: var(--wii-light-blue);
+            box-shadow: inset 0 -4px 0 var(--wii-blue);
+        }
+
+        /* Responsive for mobile */
+        @media (max-width: 500px) {
+            .grid { grid-template-columns: 1fr; }
+            .wii-container { padding: 20px; border-radius: 20px; }
+        }
+
+        .footer-text {
+            margin-top: 30px;
+            font-size: 12px;
+            color: var(--wii-gray);
+            letter-spacing: 1px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Make sure your logo file is uploaded and named logo.png -->
-        <img src="logo.png" alt="LinkRii Logo" class="logo">
-        <p>Gamer • Developer • Creator</p>
+    <div class="wii-container">
+        <!-- Using your wide logo file -->
+        <img src="LinkRiiWide.PNG" alt="LinkRii Logo" class="logo">
         
-        <div class="links-gap">
-            <a href="https://youtube.com" class="link">YOUTUBE</a>
-            <a href="https://discord.com" class="link">DISCORD SERVER</a>
-            <a href="#" class="link">MINECRAFT SERVER</a>
-            <a href="#" class="link">LATEST PROJECT</a>
+        <div class="grid">
+            <a href="https://youtube.com" class="channel-btn">YouTube Channel</a>
+            <a href="https://discord.com" class="channel-btn">Discord Hub</a>
+            <a href="#" class="channel-btn">Minecraft Server</a>
+            <a href="#" class="channel-btn">Projects</a>
         </div>
+
+        <p class="footer-text">SELECT A CHANNEL</p>
     </div>
 </body>
 </html>
