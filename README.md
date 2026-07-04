@@ -1,2 +1,2 @@
 # linkrii
-website
+github pages thingy
