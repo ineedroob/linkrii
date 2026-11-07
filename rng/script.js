@@ -123,8 +123,16 @@ form.addEventListener("submit", async (event) => {
     const result = await invokeRng({ action: mode, username, password });
     const { error: sessionError } = await supabase.auth.setSession(result.session);
     if (sessionError) throw sessionError;
+
+    submitButton.textContent = "Rolling...";
     await rollAndRedirect();
   } catch (error) {
+    const { data } = await supabase.auth.getSession();
+    if (data.session) {
+      setMode("login");
+      usernameInput.value = username;
+      passwordInput.value = "";
+    }
     showError(error.message);
     busy = false;
     submitButton.disabled = false;
@@ -146,12 +154,18 @@ async function start() {
   }
 
   if (data.session) {
-    document.querySelector(".auth").innerHTML = '<div class="eyebrow">Welcome back</div><h1>Rolling...</h1><p class="intro">Taking you to your result.</p>';
+    title.textContent = "Rolling...";
+    intro.textContent = "Taking you to your result.";
+    form.hidden = true;
+    switchButton.hidden = true;
     try {
       await rollAndRedirect();
     } catch (rollError) {
       await supabase.auth.signOut();
-      document.querySelector(".auth").innerHTML = '<div class="eyebrow">Your account</div><h1 id="form-title">Log in again</h1><p class="intro">Your session needs to be refreshed.</p><p class="message"></p><button class="submit" onclick="location.reload()">Continue</button>';
+      form.hidden = false;
+      switchButton.hidden = false;
+      setMode("login");
+      showError(rollError.message);
     }
   }
 }
