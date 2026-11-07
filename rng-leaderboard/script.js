@@ -34,7 +34,7 @@ async function loadLeaderboard() {
 
   data.forEach((player, index) => {
     const row = document.createElement("div");
-    row.className = "leaderboard-row";
+    row.className = "leaderboard-row" + (index < 3 ? " top-" + (index + 1) : "");
 
     const rank = document.createElement("span");
     rank.className = "rank";
