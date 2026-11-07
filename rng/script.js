@@ -29,7 +29,7 @@ const AURAS = [
   }
 ];
 
-// Select a random aura using weighted probabilities.
+// selects a random aura
 function chooseAura() {
   const totalWeight = AURAS.reduce(
     (sum, aura) => sum + aura.weight,
