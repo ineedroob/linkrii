@@ -10,14 +10,14 @@ const AURAS = [
     name: "Common",
     rarity: "COMMON",
     odds: "1 in 5",
-    weight: 25,
+    weight: 30,
     boxId: "246246012350000"
   },
   {
     name: "Uncommon",
     rarity: "UNCOMMON",
     odds: "1 in 10",
-    weight: 25,
+    weight: 20,
     boxId: "246246050150150"
   },
   {
