@@ -3,10 +3,84 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Redirecting...</title>
-  <script src="script.js" defer></script>
+  <meta name="theme-color" content="#090d16">
+  <title>Infinite Homepage RNG</title>
+  <style>
+    :root { color-scheme: dark; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #090d16; color: #eef2ff; }
+    * { box-sizing: border-box; }
+    body { min-height: 100vh; margin: 0; padding: 32px 18px; display: grid; place-items: center; background: radial-gradient(ellipse at 50% 0%, #17233a 0, #090d16 58%); }
+    .shell { width: min(100%, 880px); }
+    .brand { display: flex; align-items: center; gap: 12px; margin: 0 0 28px 2px; }
+    .brand-mark { width: 38px; height: 38px; display: grid; place-items: center; border-radius: 12px; background: #dbeafe; color: #101827; font-weight: 900; letter-spacing: -1px; }
+    .brand-name { font-size: 14px; font-weight: 800; letter-spacing: .12em; }
+    .brand-sub { margin-top: 3px; color: #8290a8; font-size: 11px; letter-spacing: .13em; }
+    .grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(250px, .85fr); gap: 18px; }
+    .panel { border: 1px solid #263247; border-radius: 18px; background: rgba(15, 22, 35, .94); box-shadow: 0 24px 70px rgba(0,0,0,.24); }
+    .auth { padding: clamp(24px, 5vw, 42px); }
+    .eyebrow { color: #8ba9d8; font-size: 11px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+    h1 { margin: 12px 0 8px; font-size: clamp(27px, 4vw, 36px); letter-spacing: -.04em; }
+    .intro { margin: 0 0 28px; color: #9aa8bd; line-height: 1.6; font-size: 14px; }
+    label { display: block; margin: 17px 0 0; color: #d7deea; font-size: 13px; font-weight: 650; }
+    input { display: block; width: 100%; margin-top: 8px; padding: 13px 14px; border: 1px solid #34435a; border-radius: 10px; outline: none; background: #0a111e; color: #f5f7fb; font: inherit; font-size: 14px; }
+    input:focus { border-color: #80a8e8; box-shadow: 0 0 0 3px rgba(100,149,220,.14); }
+    button { font: inherit; cursor: pointer; }
+    .submit { width: 100%; margin-top: 24px; padding: 13px 16px; border: 0; border-radius: 10px; background: #dbeafe; color: #111827; font-size: 14px; font-weight: 800; transition: transform .12s, opacity .12s; }
+    .submit:hover { transform: translateY(-1px); }
+    .submit:disabled { cursor: wait; opacity: .65; transform: none; }
+    .switch { display: block; margin: 19px auto 0; padding: 4px; border: 0; background: transparent; color: #a8c6f4; font-size: 13px; }
+    .switch:hover { color: #e3efff; }
+    .message { min-height: 20px; margin: 14px 0 0; color: #ff9a9a; font-size: 13px; line-height: 1.5; }
+    .hint { margin: 20px 0 0; padding-top: 17px; border-top: 1px solid #263247; color: #718099; font-size: 11px; line-height: 1.6; }
+    .leaderboard { padding: 28px 24px; }
+    h2 { margin: 0; font-size: 18px; letter-spacing: -.02em; }
+    .leader-sub { margin: 7px 0 22px; color: #8290a8; font-size: 12px; }
+    ol { list-style: none; padding: 0; margin: 0; }
+    li { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 0; border-top: 1px solid #202c3f; font-size: 13px; }
+    .rank { display: inline-grid; place-items: center; width: 25px; height: 25px; margin-right: 10px; border-radius: 8px; background: #1b2a40; color: #a9c8f4; font-size: 11px; font-weight: 800; }
+    .player { color: #e4eaf4; }
+    .rolls { color: #9baac0; font-variant-numeric: tabular-nums; white-space: nowrap; }
+    .loading { color: #77869d; }
+    @media (max-width: 680px) { body { padding: 22px 14px; align-items: start; } .grid { grid-template-columns: 1fr; } .leaderboard { padding: 24px; } }
+  </style>
+  <script type="module" src="script.js"></script>
 </head>
 <body>
-  <p>Rolling..</p>
+  <div class="shell">
+    <header class="brand">
+      <div class="brand-mark">R</div>
+      <div>
+        <div class="brand-name">INFINITE RNG</div>
+        <div class="brand-sub">INFINITE HOMEPAGE</div>
+      </div>
+    </header>
+
+    <main class="grid">
+      <section class="panel auth">
+        <div class="eyebrow">Your account</div>
+        <h1 id="form-title">Create your account</h1>
+        <p class="intro" id="form-intro">Choose a username and password to start rolling.</p>
+
+        <form id="auth-form">
+          <label for="username">Username
+            <input id="username" name="username" type="text" minlength="3" maxlength="20" autocomplete="username" autocapitalize="none" spellcheck="false" required>
+          </label>
+          <label for="password">Password
+            <input id="password" name="password" type="password" minlength="8" maxlength="72" autocomplete="new-password" required>
+          </label>
+          <button class="submit" id="submit-button" type="submit">Create account</button>
+        </form>
+
+        <p class="message" id="message" role="alert" aria-live="polite"></p>
+        <button class="switch" id="switch-mode" type="button">Already have an account? Log in</button>
+        <p class="hint">Your account and roll count are saved online. Use the same username and password to log in from another device. Keep your password safe because there is no email-based password recovery.</p>
+      </section>
+
+      <aside class="panel leaderboard">
+        <h2>Leaderboard</h2>
+        <p class="leader-sub">Top players by total rolls</p>
+        <ol id="leader-list"><li class="loading">Loading leaderboard...</li></ol>
+      </aside>
+    </main>
+  </div>
 </body>
 </html>
