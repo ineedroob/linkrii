@@ -1,23 +1,61 @@
-// Temporary test odds: Basic 50%, Common 30%, Uncommon 20%.
-// The box IDs are strings so they remain exact.
-const BOXES = [
-  { id: "24624607800000", weight: 50 },   // Basic
-  { id: "246246012350000", weight: 30 }, // Common
-  { id: "246246050150150", weight: 20 }  // Uncommon
+const AURAS = [
+  {
+    name: "Basic",
+    rarity: "BASIC",
+    odds: "1 in 2",
+    weight: 48,
+    boxId: "24624607800000"
+  },
+  {
+    name: "Common",
+    rarity: "COMMON",
+    odds: "1 in 5",
+    weight: 28.8,
+    boxId: "246246012350000"
+  },
+  {
+    name: "Uncommon",
+    rarity: "UNCOMMON",
+    odds: "1 in 10",
+    weight: 19.2,
+    boxId: "246246050150150"
+  },
+  {
+    name: "Rare",
+    rarity: "RARE",
+    odds: "1 in 25",
+    weight: 4,
+    boxId: "246246078246246"
+  }
 ];
 
-function chooseBox() {
-  const total = BOXES.reduce((sum, box) => sum + box.weight, 0);
-  let roll = Math.random() * total;
+// Select a random aura using weighted probabilities.
+function chooseAura() {
+  const totalWeight = AURAS.reduce(
+    (sum, aura) => sum + aura.weight,
+    0
+  );
 
-  for (const box of BOXES) {
-    roll -= box.weight;
-    if (roll < 0) return box;
+  let roll = Math.random() * totalWeight;
+
+  for (const aura of AURAS) {
+    roll -= aura.weight;
+
+    if (roll < 0) {
+      return aura;
+    }
   }
-  return BOXES[BOXES.length - 1];
+
+  return AURAS[AURAS.length - 1];
 }
 
-const selected = chooseBox();
-window.location.replace(
-  "https://infinitehomepage.com/" + encodeURIComponent(selected.id)
-);
+function roll() {
+  const result = chooseAura();
+
+  const destination =
+    "https://infinitehomepage.com/" + result.boxId;
+
+  window.location.replace(destination);
+}
+
+roll();
