@@ -13,27 +13,10 @@ const skipButton = document.getElementById("skip-button");
 const switchButton = document.getElementById("switch-mode");
 const intro = document.getElementById("form-intro");
 const message = document.getElementById("message");
-const leaderboardList = document.getElementById("leaderboard-list");
+
 
 let mode = "register";
 let busy = false;
-
-async function loadLeaderboard() {
-  if (!leaderboardList) return;
-  const { data, error } = await supabase.from("rng_leaderboard").select("username, rolls").order("rolls", { ascending: false }).limit(10);
-  if (error) { leaderboardList.textContent = "Leaderboard unavailable."; return; }
-  if (!data?.length) { leaderboardList.textContent = "No rolls yet."; return; }
-  leaderboardList.replaceChildren();
-  data.forEach((player, index) => {
-    const row = document.createElement("div");
-    row.className = "leaderboard-row";
-    const rank = document.createElement("span"); rank.textContent = "#" + (index + 1);
-    const name = document.createElement("span"); name.textContent = player.username;
-    const rolls = document.createElement("span"); rolls.textContent = Number(player.rolls).toLocaleString();
-    row.append(rank, name, rolls);
-    leaderboardList.append(row);
-  });
-}
 
 function showError(error) {
   message.textContent = error || "Something went wrong. Try again.";
@@ -177,5 +160,4 @@ async function start() {
   }
 }
 
-loadLeaderboard();
 start();
