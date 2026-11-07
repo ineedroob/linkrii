@@ -57,6 +57,12 @@
     }
     button:disabled { opacity: .6; cursor: wait; }
     #message { min-height: 18px; margin: 12px 0 0; color: #ff8888; font-size: 13px; }
+    #leaderboard { margin-top: 28px; }
+    #leaderboard h2 { margin: 0 0 12px; font-size: 17px; font-weight: 800; }
+    #leaderboard-list { display: grid; gap: 8px; color: #bbb; font-size: 12px; }
+    .leaderboard-row { display: grid; grid-template-columns: 34px 1fr auto; gap: 8px; }
+    .leaderboard-row span:first-child { color: #777; }
+    .leaderboard-row span:last-child { color: #eee; }
     [hidden] { display: none !important; }
   </style>
   <script type="module" src="script.js"></script>
@@ -79,6 +85,11 @@
     <button id="skip-button" type="button">Skip</button>
     <button id="switch-mode" type="button">Already have an account? Log in</button>
     <div id="message" role="alert" aria-live="polite"></div>
+
+    <section id="leaderboard">
+      <h2>Leaderboard</h2>
+      <div id="leaderboard-list">Loading...</div>
+    </section>
   </main>
 </body>
 </html>
