@@ -1,96 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LinkRii Clicker</title>
-    <style>
-        :root {
-            --wii-blue: #00aaff;
-            --wii-bg: #f7f7f7;
-        }
-
-        body { 
-            font-family: "Helvetica Neue", Arial, sans-serif;
-            background: radial-gradient(circle, #ffffff 0%, #e8f4f8 100%);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            overflow: hidden;
-            user-select: none;
-        }
-
-        .wii-container { 
-            width: 90%;
-            max-width: 500px;
-            text-align: center; 
-            background: white;
-            padding: 50px;
-            border-radius: 40px;
-            border: 4px solid var(--wii-blue);
-            box-shadow: 0 10px 0px rgba(0, 170, 255, 0.1);
-        }
-
-        .clicker-logo {
-            max-width: 350px;
-            height: auto;
-            cursor: pointer;
-            transition: transform 0.05s active;
-            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1));
-        }
-
-        .clicker-logo:active {
-            transform: scale(0.95);
-        }
-
-        .score-display {
-            font-size: 48px;
-            font-weight: bold;
-            color: var(--wii-blue);
-            margin-top: 20px;
-            font-variant-numeric: tabular-nums;
-        }
-
-        .label {
-            color: #7d7d7d;
-            letter-spacing: 2px;
-            font-size: 14px;
-            margin-bottom: 10px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#171717">
+  <title>LinkRii Clicker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; text-shadow: none !important; box-shadow: none !important; filter: none !important; }
+    body {
+      min-height: 100vh;
+      margin: 0;
+      padding: 32px 18px;
+      display: grid;
+      place-items: center;
+      background: #171717;
+      color: #f4f4f4;
+      font-family: 'Montserrat', sans-serif;
+      user-select: none;
+    }
+    .page { width: 100%; max-width: 560px; }
+    .clicker {
+      padding: 34px 24px 30px;
+      text-align: center;
+      background: #202020;
+      border: 1px solid #303030;
+      border-radius: 12px;
+    }
+    .eyebrow {
+      margin: 0 0 12px;
+      color: #929292;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .12em;
+    }
+    .score {
+      margin: 0;
+      color: #f4f4f4;
+      font-size: clamp(42px, 10vw, 58px);
+      line-height: 1.15;
+      font-weight: 800;
+      font-variant-numeric: tabular-nums;
+    }
+    .click-button {
+      display: inline-grid;
+      place-items: center;
+      width: min(100%, 360px);
+      min-height: 130px;
+      margin: 26px auto 18px;
+      padding: 14px;
+      border: 1px solid #393939;
+      border-radius: 9px;
+      background: #191919;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .click-button:active { transform: scale(.98); }
+    .click-button:focus-visible, a:focus-visible, button:focus-visible {
+      outline: 2px solid #00aaff;
+      outline-offset: 4px;
+    }
+    .clicker-logo { display: block; width: 100%; max-width: 310px; height: auto; }
+    .hint { margin: 0; color: #888; font-size: 11px; font-weight: 600; }
+    .rng-prompt {
+      margin-top: 16px;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      background: #202020;
+      border: 1px solid #303030;
+      border-radius: 12px;
+    }
+    .rng-copy { min-width: 0; }
+    .rng-copy h2 { margin: 0 0 5px; font-size: 14px; font-weight: 800; }
+    .rng-copy p { margin: 0; color: #999; font-size: 11px; line-height: 1.5; }
+    .rng-actions { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+    .rng-link {
+      display: inline-block;
+      padding: 10px 13px;
+      border-radius: 6px;
+      background: #00aaff;
+      color: #101010;
+      font-size: 11px;
+      font-weight: 800;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .dismiss {
+      padding: 6px 0;
+      border: 0;
+      background: transparent;
+      color: #888;
+      font: inherit;
+      font-size: 10px;
+      cursor: pointer;
+    }
+    .dismiss:hover { color: #ddd; }
+    @media (max-width: 480px) {
+      .rng-prompt { align-items: flex-start; flex-direction: column; }
+      .rng-actions { width: 100%; justify-content: space-between; }
+    }
+  </style>
 </head>
 <body>
+  <main class="page">
+    <section class="clicker" aria-label="LinkRii clicker">
+      <p class="eyebrow">TOTAL CLICKS</p>
+      <p id="score" class="score" aria-live="polite">0</p>
+      <button class="click-button" id="logoBtn" type="button" aria-label="Click to increase your score">
+        <img src="LinkRiiWide.PNG" alt="LinkRii" class="clicker-logo">
+      </button>
+      <p class="hint">TAP THE LOGO TO CLICK</p>
+    </section>
 
-    <div class="wii-container">
-        <p class="label">TOTAL CLICKS</p>
-        <div id="score" class="score-display">0</div>
-        
-        <br><br>
+    <section class="rng-prompt" id="rngPrompt">
+      <div class="rng-copy">
+        <h2>Want something random?</h2>
+        <p>Try the Infinite Homepage RNG and see what you roll.</p>
+      </div>
+      <div class="rng-actions">
+        <a class="rng-link" href="/rng/">Open RNG</a>
+        <button class="dismiss" id="dismissPrompt" type="button">Not now</button>
+      </div>
+    </section>
+  </main>
 
-        <img src="LinkRiiWide.PNG" alt="Button" class="clicker-logo" id="logoBtn">
-        
-        <br><br>
-        <p class="label" style="margin-top: 20px;">TAP THE LOGO TO CLICK</p>
-    </div>
+  <script>
+    const scoreDisplay = document.getElementById('score');
+    const logoButton = document.getElementById('logoBtn');
+    const prompt = document.getElementById('rngPrompt');
+    let count = 0;
 
-    <script>
-        let count = 0;
-        const scoreDisplay = document.getElementById('score');
-        const logo = document.getElementById('logoBtn');
+    logoButton.addEventListener('click', () => {
+      count += 1;
+      scoreDisplay.textContent = count.toLocaleString();
+    });
 
-        logo.addEventListener('click', () => {
-            count++;
-            scoreDisplay.innerText = count;
-            
-            // Subtle "pop" effect
-            logo.style.transform = "scale(1.05)";
-            setTimeout(() => {
-                logo.style.transform = "scale(1)";
-            }, 50);
-        });
-    </script>
-
+    document.getElementById('dismissPrompt').addEventListener('click', () => {
+      prompt.hidden = true;
+    });
+  </script>
 </body>
 </html>
