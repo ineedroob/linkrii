@@ -47,21 +47,22 @@
       display: inline-grid;
       place-items: center;
       width: 112px;
-      min-height: 112px;
+      height: 112px;
       margin: 26px auto 18px;
-      padding: 12px;
-      border: 1px solid #393939;
-      border-radius: 9px;
-      background: #191919;
+      padding: 0;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
       cursor: pointer;
       -webkit-tap-highlight-color: transparent;
+      appearance: none;
     }
     .click-button:active { transform: scale(.98); }
     .click-button:focus-visible, a:focus-visible, button:focus-visible {
       outline: 2px solid #00aaff;
       outline-offset: 4px;
     }
-    .clicker-logo { display: block; width: 76px; height: 76px; object-fit: contain; }
+    .clicker-logo { display: block; width: 100px; height: 100px; object-fit: contain; background: transparent; }
     .hint { margin: 0; color: #888; font-size: 11px; font-weight: 600; }
     .rng-prompt {
       margin-top: 16px;
