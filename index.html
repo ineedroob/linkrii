@@ -32,9 +32,8 @@
     .eyebrow {
       margin: 0 0 12px;
       color: #929292;
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 700;
-      letter-spacing: .12em;
     }
     .score {
       margin: 0;
@@ -47,10 +46,10 @@
     .click-button {
       display: inline-grid;
       place-items: center;
-      width: min(100%, 360px);
-      min-height: 130px;
+      width: 112px;
+      min-height: 112px;
       margin: 26px auto 18px;
-      padding: 14px;
+      padding: 12px;
       border: 1px solid #393939;
       border-radius: 9px;
       background: #191919;
@@ -62,7 +61,7 @@
       outline: 2px solid #00aaff;
       outline-offset: 4px;
     }
-    .clicker-logo { display: block; width: 100%; max-width: 310px; height: auto; }
+    .clicker-logo { display: block; width: 76px; height: 76px; object-fit: contain; }
     .hint { margin: 0; color: #888; font-size: 11px; font-weight: 600; }
     .rng-prompt {
       margin-top: 16px;
@@ -109,18 +108,18 @@
 <body>
   <main class="page">
     <section class="clicker" aria-label="LinkRii clicker">
-      <p class="eyebrow">TOTAL CLICKS</p>
+      <p class="eyebrow">Total clicks</p>
       <p id="score" class="score" aria-live="polite">0</p>
       <button class="click-button" id="logoBtn" type="button" aria-label="Click to increase your score">
-        <img src="LinkRiiWide.PNG" alt="LinkRii" class="clicker-logo">
+        <img src="clickicon.png" alt="Click" class="clicker-logo">
       </button>
-      <p class="hint">TAP THE LOGO TO CLICK</p>
+      <p class="hint">Click the icon to add a click</p>
     </section>
 
     <section class="rng-prompt" id="rngPrompt">
       <div class="rng-copy">
-        <h2>Want something random?</h2>
-        <p>Try the Infinite Homepage RNG and see what you roll.</p>
+        <h2>Roob&#39;s RNG</h2>
+        <p>Sol&#39;s RNG but in Infinite Homepage.</p>
       </div>
       <div class="rng-actions">
         <a class="rng-link" href="/rng/">Open RNG</a>
