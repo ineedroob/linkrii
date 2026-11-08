@@ -154,6 +154,11 @@ async function start() {
     try {
       await rollAndRedirect();
     } catch (error) {
+      if (error.message?.includes("only roll 2 times per second")) {
+        document.querySelector("main").innerHTML = '<h1>Slow down!</h1><p>You can only roll 2 times per second. Wait a moment, then try again.</p><button id="retry-roll">Try again</button>';
+        document.getElementById("retry-roll").addEventListener("click", () => location.reload());
+        return;
+      }
       await supabase.auth.signOut();
       document.querySelector("main").innerHTML = '<h1>Infinite RNG</h1><p>Session expired. Please continue again.</p><button onclick="location.reload()">Continue</button>';
     }
